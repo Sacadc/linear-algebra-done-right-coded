@@ -3,11 +3,11 @@ syntax = "proto3";
 package linearmaps;
 
 service LinearMaps {
-  rpc Apply (ApplyRequest) returns (ApplyResponse);      // T(v)
-  rpc Add (BinaryMapRequest) returns (MapResponse);      // S + T
-  rpc Scale (ScaleRequest) returns (MapResponse);        // λT
-  rpc Compose (ComposeRequest) returns (MapResponse);    // outer ∘ inner
-  rpc SendZero (ZeroRequest) returns (ZeroResponse);     // T(0) = 0 ?
+  rpc Apply (ApplyRequest) returns (ApplyResponse);     
+  rpc Add (BinaryMapRequest) returns (MapResponse);     
+  rpc Scale (ScaleRequest) returns (MapResponse);        
+  rpc Compose (ComposeRequest) returns (MapResponse);   
+  rpc SendZero (ZeroRequest) returns (ZeroResponse);    
 }
 
 message Matrix { repeated Row rows = 1; }
@@ -20,6 +20,6 @@ message BinaryMapRequest { Matrix first = 1; Matrix second = 2; }
 message MapResponse      { Matrix result = 1; string note = 2; }
 
 message ScaleRequest { Matrix map = 1; double scalar = 2; }
-message ComposeRequest { Matrix outer = 1; Matrix inner = 2; }  // result = outer·inner (do inner first)
+message ComposeRequest { Matrix outer = 1; Matrix inner = 2; } 
 message ZeroRequest  { Matrix map = 1; }
 message ZeroResponse { bool holds = 1; repeated double t_of_zero = 2; }
